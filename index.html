@@ -9,18 +9,17 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
   }
 
   body {
-    background: linear-gradient(135deg, #ffeff7, #ffe6f0, #fff0f6);
-    min-height: 100vh;
+    background: linear-gradient(135deg, #fff0f5, #ffe4ec, #fff8fb);
     overflow-x: hidden;
   }
 
   header {
     text-align: center;
-    padding: 80px 20px 40px;
+    padding: 60px 20px 40px;
     color: #ff4da6;
     text-shadow: 0 0 10px #ffb6c1;
   }
@@ -32,95 +31,121 @@
   }
 
   header h2 {
-    font-size: 1.5rem;
-    margin-top: 10px;
+    font-size: 1.4rem;
     color: #ff77a9;
+    margin-top: 10px;
   }
 
   @keyframes glow {
     from { text-shadow: 0 0 10px #ff99c8, 0 0 20px #ff66b2; }
-    to { text-shadow: 0 0 25px #ff99c8, 0 0 45px #ff4da6; }
+    to { text-shadow: 0 0 30px #ff99c8, 0 0 50px #ff4da6; }
   }
 
-  /* Rotating circular gallery section */
-  .gallery-section {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 60px 20px;
-    perspective: 1000px;
-  }
-
-  .circle-gallery {
+  /* ------------- CIRCULAR ROTATING GALLERY ------------- */
+  .circle-container {
     position: relative;
     width: 350px;
     height: 350px;
+    margin: 50px auto;
     transform-style: preserve-3d;
-    animation: rotate 25s linear infinite;
+    animation: spin 25s linear infinite;
   }
 
-  @keyframes rotate {
+  @keyframes spin {
     from { transform: rotateY(0deg); }
     to { transform: rotateY(360deg); }
   }
 
-  .circle-gallery img {
+  .circle-container img {
     position: absolute;
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
+    object-fit: cover;
     border: 4px solid #fff;
-    box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
-    transition: transform 0.5s, box-shadow 0.5s;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
+    transition: transform 0.4s;
   }
 
-  .circle-gallery img:hover {
+  .circle-container img:hover {
     transform: scale(1.15);
-    box-shadow: 0 0 30px rgba(255, 182, 193, 1);
   }
 
-  /* Positioning images in circular 3D */
-  .circle-gallery img:nth-child(1) { transform: rotateY(0deg) translateZ(170px); }
-  .circle-gallery img:nth-child(2) { transform: rotateY(45deg) translateZ(170px); }
-  .circle-gallery img:nth-child(3) { transform: rotateY(90deg) translateZ(170px); }
-  .circle-gallery img:nth-child(4) { transform: rotateY(135deg) translateZ(170px); }
-  .circle-gallery img:nth-child(5) { transform: rotateY(180deg) translateZ(170px); }
-  .circle-gallery img:nth-child(6) { transform: rotateY(225deg) translateZ(170px); }
-  .circle-gallery img:nth-child(7) { transform: rotateY(270deg) translateZ(170px); }
-  .circle-gallery img:nth-child(8) { transform: rotateY(315deg) translateZ(170px); }
+  .circle-container img:nth-child(1) { transform: rotateY(0deg) translateZ(170px); }
+  .circle-container img:nth-child(2) { transform: rotateY(45deg) translateZ(170px); }
+  .circle-container img:nth-child(3) { transform: rotateY(90deg) translateZ(170px); }
+  .circle-container img:nth-child(4) { transform: rotateY(135deg) translateZ(170px); }
+  .circle-container img:nth-child(5) { transform: rotateY(180deg) translateZ(170px); }
+  .circle-container img:nth-child(6) { transform: rotateY(225deg) translateZ(170px); }
+  .circle-container img:nth-child(7) { transform: rotateY(270deg) translateZ(170px); }
+  .circle-container img:nth-child(8) { transform: rotateY(315deg) translateZ(170px); }
 
-  /* Message section */
-  .message {
-    text-align: center;
-    color: #ff4da6;
-    font-size: 1.3rem;
-    max-width: 600px;
-    margin: 50px auto;
-    line-height: 1.8;
-    padding: 0 20px;
+  /* ------------- HORIZONTAL CAROUSEL ------------- */
+  .carousel {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    margin: 50px 0;
   }
 
-  /* Responsive */
+  .carousel-track {
+    display: flex;
+    animation: scroll 40s linear infinite;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .carousel img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    margin: 0 15px;
+    border: 4px solid white;
+    object-fit: cover;
+    box-shadow: 0 0 20px rgba(255, 182, 193, 0.8);
+  }
+
+  /* ------------- CONFETTI / BALLOONS ------------- */
+  .balloon {
+    position: absolute;
+    width: 30px;
+    height: 40px;
+    background: #ff69b4;
+    border-radius: 50% 50% 45% 45%;
+    animation: float 8s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+  }
+
+  /* ------------- MUSIC BUTTON ------------- */
+  .music-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 0 15px #ffb6c1;
+  }
+
   @media (max-width: 768px) {
     header h1 { font-size: 2rem; }
-    header h2 { font-size: 1rem; }
-    .circle-gallery {
-      width: 250px;
-      height: 250px;
-    }
-    .circle-gallery img {
-      width: 90px;
-      height: 90px;
-    }
-  }
-
-  footer {
-    text-align: center;
-    color: #ff77a9;
-    padding: 20px;
-    font-size: 0.9rem;
+    .circle-container { width: 260px; height: 260px; }
+    .circle-container img { width: 80px; height: 80px; }
+    .carousel img { width: 90px; height: 90px; }
   }
 </style>
 </head>
@@ -128,30 +153,72 @@
 
   <header>
     <h1>Happy 25th Birthday 🎉</h1>
-    <h2>To the Beautiful Soul — Soumya Uggirala 💖</h2>
+    <h2>To the Gorgeous Soul — Soumya Uggirala 💖</h2>
   </header>
 
-  <section class="gallery-section">
-    <div class="circle-gallery">
-      <!-- Replace with Soumya's images -->
+  <!-- Circular rotating photo gallery -->
+  <div class="circle-container">
+    <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="">
+    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="">
+    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="">
+    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" alt="">
+    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb" alt="">
+    <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb" alt="">
+    <img src="https://images.unsplash.com/photo-1519340333755-56e9c3b1c4a9" alt="">
+    <img src="https://images.unsplash.com/photo-1520813792240-56fc4a3765a7" alt="">
+  </div>
+
+  <!-- Horizontal carousel of images -->
+  <div class="carousel">
+    <div class="carousel-track">
       <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="">
       <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="">
       <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" alt="">
-      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="">
       <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb" alt="">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" alt="">
       <img src="https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb" alt="">
       <img src="https://images.unsplash.com/photo-1519340333755-56e9c3b1c4a9" alt="">
       <img src="https://images.unsplash.com/photo-1520813792240-56fc4a3765a7" alt="">
+      <!-- duplicate for infinite scroll -->
+      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="">
+      <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="">
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" alt="">
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb" alt="">
     </div>
-  </section>
-
-  <div class="message">
-    <p>Dear Soumya, you are an inspiration of grace and joy.  
-    May your 25th year bring endless smiles, warm moments, and dreams fulfilled.  
-    Keep shining, because the world is more beautiful with you in it 💫</p>
   </div>
 
-  <footer>Made with 💖 for Soumya’s 25th Birthday — 2025</footer>
+  <!-- Music control -->
+  <button class="music-control" id="musicBtn">🎵</button>
+  <audio id="bgMusic" loop>
+    <!-- Replace with your own song -->
+    <source src="your-song.mp3" type="audio/mpeg">
+  </audio>
 
+  <script>
+    // Balloon creation
+    for (let i = 0; i < 20; i++) {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.style.left = Math.random() * 100 + 'vw';
+      balloon.style.animationDuration = 6 + Math.random() * 5 + 's';
+      balloon.style.background = `hsl(${Math.random() * 360}, 70%, 70%)`;
+      document.body.appendChild(balloon);
+    }
+
+    // Music control
+    const music = document.getElementById("bgMusic");
+    const btn = document.getElementById("musicBtn");
+    let playing = false;
+    btn.onclick = () => {
+      if (!playing) {
+        music.play();
+        btn.textContent = "⏸️";
+      } else {
+        music.pause();
+        btn.textContent = "🎵";
+      }
+      playing = !playing;
+    };
+  </script>
 </body>
 </html>
